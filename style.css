@@ -168,9 +168,12 @@ h1 {
 .business-location {
     width: 100%;
     min-height: 720px;
+
+    background-color: #111;
     background-image: url("images/2.png");
-    background-size: cover;
-    background-position: center;
+
+    background-size: 600px auto;
+    background-position: center center;
     background-repeat: no-repeat;
 
     display: flex;
@@ -184,7 +187,8 @@ h1 {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.25);
+
+    background: rgba(0, 0, 0, 0.15);
 }
 
 .business-location-overlay {
@@ -192,15 +196,16 @@ h1 {
     z-index: 1;
 
     width: 90%;
-    max-width: 700px;
+    max-width: 650px;
 
-    margin-top: 80px;
+    margin-top: 65px;
 
     text-align: center;
 }
 
 .business-location-overlay h2 {
     margin: 15px 0 10px;
+    font-size: 32px;
 }
 
 .business-location-overlay p {
@@ -208,7 +213,7 @@ h1 {
 }
 
 .location-address {
-    margin-top: 25px !important;
+    margin-top: 28px !important;
     line-height: 1.7;
 }
 
@@ -218,14 +223,18 @@ h1 {
     justify-content: center;
 
     margin-top: 25px;
-
-    padding: 12px 22px;
+    padding: 13px 25px;
 
     border: 1px solid #fff;
+
     color: #fff;
     text-decoration: none;
 
-    transition: 0.3s ease;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+
+    transition: background 0.3s ease,
+                color 0.3s ease;
 }
 
 .business-location .location-button:hover {
@@ -237,13 +246,18 @@ h1 {
 
     .business-location {
         min-height: 650px;
-        background-position: center;
+
+        background-size: 100% auto;
+        background-position: center bottom;
     }
 
     .business-location-overlay {
-        margin-top: 55px;
+        margin-top: 45px;
     }
 
+    .business-location-overlay h2 {
+        font-size: 27px;
+    }
 }
 /* =========================================
    GALLERY
