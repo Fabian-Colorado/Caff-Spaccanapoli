@@ -565,6 +565,33 @@ h1 {
 
 }
 
+/* INSTAGRAM */
+
+.instagram-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 25px;
+    padding: 13px 25px;
+
+    border: 1px solid #fff;
+
+    color: #fff;
+    text-decoration: none;
+
+    font-size: 14px;
+    letter-spacing: 1.5px;
+
+    transition: background 0.3s ease,
+                color 0.3s ease;
+}
+
+.instagram-button:hover {
+    background: #fff;
+    color: #111;
+}
+
 
 /* =========================================
    MOBILE
