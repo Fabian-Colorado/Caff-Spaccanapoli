@@ -219,90 +219,70 @@ h1 {
    GALLERY
 ========================================= */
 
-.gallery {
-
-    padding: 80px 20px;
-
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-}
-
-
-.gallery-window {
-
+.gallery-section {
+    width: 100%;
     overflow: hidden;
-
 }
 
+.gallery {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
 
 .gallery-track {
-
     display: flex;
-
     gap: 20px;
-
-    transition:
-        transform 0.5s ease;
-
+    transition: transform 0.5s ease;
+    touch-action: pan-y;
 }
 
+.gallery-item {
+    flex: 0 0 calc((100% - 40px) / 3);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #111;
+}
 
-.gallery-track img {
-
-    flex:
-        0 0 calc((100% - 40px) / 3);
-
-    aspect-ratio: 2 / 1;
-
+.gallery-item img {
     width: 100%;
-
-    object-fit: cover;
-
+    height: 100%;
     display: block;
 
-}
+    /* Esta es la función que recordabas */
+    object-fit: cover;
 
+    object-position: center;
+}
 
 .gallery-controls {
-
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
-
-    margin-top: 20px;
-
+    justify-content: center;
+    gap: 25px;
+    margin-top: 25px;
 }
-
 
 .gallery-controls button {
-
-    background: none;
-
-    border: none;
-
-    color: white;
-
-    font-size: 28px;
-
+    width: 42px;
+    height: 42px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
     cursor: pointer;
-
+    font-size: 20px;
 }
 
-
-.gallery-counter {
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    opacity: 0.6;
-
+.gallery-controls button:hover {
+    background: #fff;
+    color: #111;
 }
 
+#gallery-counter {
+    min-width: 60px;
+    text-align: center;
+}
 
 /* =========================================
    LOCATION
@@ -538,70 +518,17 @@ h1 {
 
 @media (max-width: 700px) {
 
-
-    header {
-
-        padding:
-            20px;
-
-    }
-
-
-    .language-selector {
-
-        gap: 5px;
-
-    }
-
-
-    .hero {
-
-        min-height: 65vh;
-
-        background-size: cover;
-
-    }
-
-
-    .gallery {
-
-        padding:
-            60px 20px;
-
-    }
-
-
     .gallery-track {
-
         gap: 0;
-
     }
 
-
-    .gallery-track img {
-
-        flex:
-            0 0 100%;
-
+    .gallery-item {
+        flex: 0 0 100%;
         aspect-ratio: 1 / 1;
-
     }
 
-
-    .location {
-
-        padding:
-            100px 20px;
-
+    .gallery-controls {
+        margin-top: 20px;
     }
-
-
-    .instagram {
-
-        padding:
-            100px 20px 150px;
-
-    }
-
 
 }
