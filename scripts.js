@@ -1,35 +1,32 @@
-/* =========================================
+/* =========================
    LANGUAGE SYSTEM
-========================================= */
+========================= */
 
 const languageButtons = document.querySelectorAll("[data-language]");
-
-const translatableElements =
-    document.querySelectorAll("[data-en]");
-
+const translatableElements = document.querySelectorAll("[data-it]");
 
 function changeLanguage(language) {
 
     translatableElements.forEach(function(element) {
 
-        element.textContent =
-            element.dataset[language];
+        const translation = element.dataset[language];
+
+        if (translation) {
+            element.textContent = translation;
+        }
 
     });
 
     document.documentElement.lang = language;
 
     localStorage.setItem("language", language);
-
 }
-
 
 languageButtons.forEach(function(button) {
 
     button.addEventListener("click", function() {
 
-        const language =
-            button.dataset.language;
+        const language = button.dataset.language;
 
         changeLanguage(language);
 
@@ -37,170 +34,142 @@ languageButtons.forEach(function(button) {
 
 });
 
-
-const savedLanguage =
-    localStorage.getItem("language") || "en";
-
+const savedLanguage = localStorage.getItem("language") || "it";
 
 changeLanguage(savedLanguage);
 
 
-/* =========================================
+/* =========================
    GALLERY
-========================================= */
+========================= */
 
-const track =
-    document.querySelector(".gallery-track");
+const galleryTrack = document.querySelector(".gallery-track");
+const galleryItems = document.querySelectorAll(".gallery-item");
+const previousButton = document.querySelector("#prev-button");
+const nextButton = document.querySelector("#next-button");
+const galleryCounter = document.querySelector("#gallery-counter");
 
-const images =
-    document.querySelectorAll(".gallery-track img");
+if (galleryTrack && galleryItems.length > 0) {
 
-const nextButton =
-    document.getElementById("next");
+    let currentIndex = 0;
 
-const previousButton =
-    document.getElementById("previous");
+    function getItemsPerView() {
 
-const currentNumber =
-    document.getElementById("current-number");
+        if (window.innerWidth <= 700) {
+            return 1;
+        }
 
-
-let currentImage = 0;
-
-
-function isMobile() {
-
-    return window.innerWidth <= 700;
-
-}
-
-
-function getMaxIndex() {
-
-    if (isMobile()) {
-
-        return images.length - 1;
-
-    }
-
-    return images.length - 3;
-
-}
-
-
-function updateGallery() {
-
-    const gap =
-        isMobile() ? 0 : 20;
-
-
-    const imageWidth =
-        isMobile()
-
-            ? track.parentElement.offsetWidth
-
-            : (track.parentElement.offsetWidth - 40) / 3;
-
-
-    const move =
-        (imageWidth + gap) * currentImage;
-
-
-    track.style.transform =
-        `translateX(-${move}px)`;
-
-
-    currentNumber.textContent =
-        currentImage + 1;
-
-}
-
-
-function nextImage() {
-
-    currentImage++;
-
-
-    if (currentImage > getMaxIndex()) {
-
-        currentImage = 0;
-
+        return 3;
     }
 
 
-    updateGallery();
+    function updateGallery() {
 
-}
+        const itemsPerView = getItemsPerView();
 
+        const itemWidth = galleryItems[0].offsetWidth;
 
-function previousImage() {
+        const gap = parseFloat(
+            window.getComputedStyle(galleryTrack).gap
+        ) || 0;
 
-    currentImage--;
+        const moveDistance = itemWidth + gap;
 
+        galleryTrack.style.transform =
+            `translateX(-${currentIndex * moveDistance}px)`;
 
-    if (currentImage < 0) {
-
-        currentImage = getMaxIndex();
-
+        galleryCounter.textContent =
+            `${currentIndex + 1} / ${galleryItems.length}`;
     }
 
 
-    updateGallery();
+    function nextImage() {
 
-}
+        const itemsPerView = getItemsPerView();
 
+        const maxIndex =
+            galleryItems.length - itemsPerView;
 
-nextButton.addEventListener(
-    "click",
-    nextImage
-);
+        if (currentIndex < maxIndex) {
 
+            currentIndex++;
 
-previousButton.addEventListener(
-    "click",
-    previousImage
-);
+        } else {
 
+            currentIndex = 0;
 
-window.addEventListener(
-    "resize",
-    updateGallery
-);
+        }
 
-
-/* =========================================
-   MOBILE SWIPE
-========================================= */
-
-let startTouch = 0;
-
-
-track.addEventListener(
-    "touchstart",
-    function(event) {
-
-        startTouch =
-            event.touches[0].clientX;
-
+        updateGallery();
     }
-);
 
 
-track.addEventListener(
-    "touchend",
-    function(event) {
+    function previousImage() {
 
-        const endTouch =
-            event.changedTouches[0].clientX;
+        const itemsPerView = getItemsPerView();
+
+        const maxIndex =
+            galleryItems.length - itemsPerView;
+
+        if (currentIndex > 0) {
+
+            currentIndex--;
+
+        } else {
+
+            currentIndex = maxIndex;
+
+        }
+
+        updateGallery();
+    }
 
 
-        const difference =
-            startTouch - endTouch;
+    previousButton.addEventListener(
+        "click",
+        previousImage
+    );
+
+    nextButton.addEventListener(
+        "click",
+        nextImage
+    );
 
 
-        if (Math.abs(difference) > 50) {
+    /* =========================
+       MOBILE SWIPE
+    ========================= */
 
-            if (difference > 0) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    galleryTrack.addEventListener(
+        "touchstart",
+        function(event) {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        },
+        { passive: true }
+    );
+
+
+    galleryTrack.addEventListener(
+        "touchend",
+        function(event) {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+            const swipeDistance =
+                touchEndX - touchStartX;
+
+            if (Math.abs(swipeDistance) < 50) {
+                return;
+            }
+
+            if (swipeDistance < 0) {
 
                 nextImage();
 
@@ -210,29 +179,30 @@ track.addEventListener(
 
             }
 
+        },
+        { passive: true }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        function() {
+
+            const itemsPerView = getItemsPerView();
+
+            const maxIndex =
+                galleryItems.length - itemsPerView;
+
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            updateGallery();
+
         }
-
-    }
-);
+    );
 
 
-/* =========================================
-   MOBILE AUTO SLIDE
-========================================= */
+    updateGallery();
 
-setInterval(function() {
-
-    if (isMobile()) {
-
-        nextImage();
-
-    }
-
-}, 4000);
-
-
-/* =========================================
-   INITIALIZE
-========================================= */
-
-updateGallery();
+}
