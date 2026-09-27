@@ -223,6 +223,8 @@ h1 {
     justify-content: center;
 
     margin-top: 25px;
+    margin-bottom: 30px;
+
     padding: 13px 25px;
 
     border: 1px solid #fff;
@@ -266,8 +268,8 @@ h1 {
 .gallery-section {
     width: 100%;
     overflow: hidden;
+    padding-top: 60px;
 }
-
 .gallery {
     width: 100%;
     max-width: 1200px;
@@ -570,8 +572,8 @@ h1 {
 
 @media (max-width: 700px) {
 
-    .gallery-track {
-        gap: 0;
+    .gallery-section {
+        padding-top: 45px;
     }
 
     .gallery-item {
