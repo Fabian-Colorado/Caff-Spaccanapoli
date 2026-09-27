@@ -613,3 +613,136 @@ h1 {
     }
 
 }
+/* =========================================
+   MENU PAGE
+========================================= */
+
+.menu-page {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 0 140px;
+}
+
+
+/* CATEGORY */
+
+.menu-category {
+    margin-bottom: 100px;
+}
+
+.menu-category h1 {
+    margin: 0 0 45px;
+
+    font-size: 28px;
+    font-weight: 400;
+
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+
+/* MENU ITEMS */
+
+.menu-items {
+    width: 100%;
+}
+
+
+/* ITEM */
+
+.menu-item {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+
+/* NAMES */
+
+.menu-name {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    line-height: 1.4;
+}
+
+.menu-name span:nth-child(1) {
+    font-size: 17px;
+}
+
+.menu-name span:nth-child(2) {
+    font-size: 13px;
+    opacity: 0.55;
+}
+
+.menu-name span:nth-child(3) {
+    font-size: 13px;
+    opacity: 0.55;
+}
+
+
+/* PRICE */
+
+.menu-price {
+    font-size: 15px;
+    margin-left: 30px;
+
+    /* TEMPORARILY HIDDEN
+       Prices remain in the HTML
+       and can be shown later. */
+
+    display: none;
+}
+
+
+/* BACK BUTTON */
+
+.menu-page + .floating-menu {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .menu-page {
+        width: 88%;
+        padding: 70px 0 120px;
+    }
+
+    .menu-category {
+        margin-bottom: 75px;
+    }
+
+    .menu-category h1 {
+        margin-bottom: 30px;
+
+        font-size: 22px;
+        letter-spacing: 4px;
+    }
+
+    .menu-item {
+        padding: 17px 0;
+    }
+
+    .menu-name span:nth-child(1) {
+        font-size: 16px;
+    }
+
+    .menu-name span:nth-child(2),
+    .menu-name span:nth-child(3) {
+        font-size: 12px;
+    }
+
+}
