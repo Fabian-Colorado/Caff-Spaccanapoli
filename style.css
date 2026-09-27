@@ -1,0 +1,607 @@
+/* =========================================
+   BASIC
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    background-color: #111;
+
+    color: white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+
+    padding: 20px 40px;
+
+}
+
+
+nav {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.site-name {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.language-selector {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.language-selector button {
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+
+        url("images/1.jpg");
+
+
+    background-size: contain;
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-color: #111;
+
+}
+
+
+.hero-content {
+
+    padding: 20px;
+
+}
+
+
+.hero-location {
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+
+    opacity: 0.6;
+
+}
+
+
+h1 {
+
+    font-size:
+        clamp(50px, 8vw, 110px);
+
+    letter-spacing: 8px;
+
+    margin: 0;
+
+}
+
+
+.hero-description {
+
+    margin-top: 25px;
+
+    font-size: 16px;
+
+    opacity: 0.7;
+
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.intro {
+
+    padding: 120px 20px;
+
+    text-align: center;
+
+}
+
+
+.intro-content {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+}
+
+
+.section-label {
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.5;
+
+}
+
+
+.intro h2 {
+
+    font-size:
+        clamp(32px, 5vw, 60px);
+
+    font-weight: 400;
+
+    margin: 25px 0;
+
+}
+
+
+.intro p {
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================
+   GALLERY
+========================================= */
+
+.gallery {
+
+    padding: 80px 20px;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+}
+
+
+.gallery-window {
+
+    overflow: hidden;
+
+}
+
+
+.gallery-track {
+
+    display: flex;
+
+    gap: 20px;
+
+    transition:
+        transform 0.5s ease;
+
+}
+
+
+.gallery-track img {
+
+    flex:
+        0 0 calc((100% - 40px) / 3);
+
+    aspect-ratio: 2 / 1;
+
+    width: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+.gallery-controls {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+}
+
+
+.gallery-controls button {
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+
+.gallery-counter {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================================
+   LOCATION
+========================================= */
+
+.location {
+
+    padding: 140px 20px;
+
+    text-align: center;
+
+}
+
+
+.location-content {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+}
+
+
+.location h2 {
+
+    font-size:
+        clamp(32px, 5vw, 60px);
+
+    font-weight: 400;
+
+    margin: 25px 0;
+
+}
+
+
+.location p {
+
+    line-height: 1.8;
+
+    opacity: 0.7;
+
+}
+
+
+.location-button,
+.instagram-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 30px;
+
+    padding: 14px 22px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border: 1px solid #444;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    transition:
+
+        background 0.3s ease,
+
+        color 0.3s ease,
+
+        border-color 0.3s ease;
+
+}
+
+
+.location-button:hover,
+.instagram-button:hover {
+
+    background: white;
+
+    color: #111;
+
+    border-color: white;
+
+}
+
+
+/* =========================================
+   INSTAGRAM
+========================================= */
+
+.instagram {
+
+    padding:
+        120px 20px 180px;
+
+    text-align: center;
+
+}
+
+
+.instagram-content {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+}
+
+
+.instagram h2 {
+
+    font-size:
+        clamp(32px, 5vw, 60px);
+
+    font-weight: 400;
+
+    margin: 25px 0;
+
+}
+
+
+.instagram p {
+
+    line-height: 1.8;
+
+    opacity: 0.7;
+
+}
+
+
+/* =========================================
+   FLOATING MENU
+========================================= */
+
+.floating-menu {
+
+    position: fixed;
+
+    left: 24px;
+
+    bottom: 24px;
+
+    z-index: 1000;
+
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+
+    padding: 13px 18px;
+
+
+    color: white;
+
+    text-decoration: none;
+
+
+    background:
+        rgba(17, 17, 17, 0.85);
+
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+
+    backdrop-filter:
+        blur(8px);
+
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+
+    transition:
+
+        background 0.3s ease,
+
+        color 0.3s ease,
+
+        border-color 0.3s ease,
+
+        transform 0.3s ease;
+
+}
+
+
+.floating-menu::after {
+
+    content: "→";
+
+    font-size: 14px;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.floating-menu:hover {
+
+    background: white;
+
+    color: #111;
+
+    border-color: white;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.floating-menu:hover::after {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+
+    header {
+
+        padding:
+            20px;
+
+    }
+
+
+    .language-selector {
+
+        gap: 5px;
+
+    }
+
+
+    .hero {
+
+        min-height: 65vh;
+
+        background-size: cover;
+
+    }
+
+
+    .gallery {
+
+        padding:
+            60px 20px;
+
+    }
+
+
+    .gallery-track {
+
+        gap: 0;
+
+    }
+
+
+    .gallery-track img {
+
+        flex:
+            0 0 100%;
+
+        aspect-ratio: 1 / 1;
+
+    }
+
+
+    .location {
+
+        padding:
+            100px 20px;
+
+    }
+
+
+    .instagram {
+
+        padding:
+            100px 20px 150px;
+
+    }
+
+
+}
