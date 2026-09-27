@@ -43,105 +43,122 @@ changeLanguage(savedLanguage);
    GALLERY
 ========================= */
 
+const gallery = document.querySelector(".gallery");
 const galleryTrack = document.querySelector(".gallery-track");
 const galleryItems = document.querySelectorAll(".gallery-item");
+
 const previousButton = document.querySelector("#prev-button");
 const nextButton = document.querySelector("#next-button");
 const galleryCounter = document.querySelector("#gallery-counter");
 
-if (galleryTrack && galleryItems.length > 0) {
+let currentIndex = 0;
 
-    let currentIndex = 0;
 
-    function getItemsPerView() {
+function getItemsPerView() {
 
-        if (window.innerWidth <= 700) {
-            return 1;
-        }
-
-        return 3;
+    if (window.innerWidth <= 700) {
+        return 1;
     }
 
+    return 3;
+}
 
-    function updateGallery() {
 
-        const itemsPerView = getItemsPerView();
+function updateGallery() {
 
-        const itemWidth = galleryItems[0].offsetWidth;
-
-        const gap = parseFloat(
-            window.getComputedStyle(galleryTrack).gap
-        ) || 0;
-
-        const moveDistance = itemWidth + gap;
-
-        galleryTrack.style.transform =
-            `translateX(-${currentIndex * moveDistance}px)`;
-
-        galleryCounter.textContent =
-            `${currentIndex + 1} / ${galleryItems.length}`;
+    if (!galleryTrack || galleryItems.length === 0) {
+        return;
     }
 
+    const itemsPerView = getItemsPerView();
 
-    function nextImage() {
+    const maxIndex = galleryItems.length - itemsPerView;
 
-        const itemsPerView = getItemsPerView();
-
-        const maxIndex =
-            galleryItems.length - itemsPerView;
-
-        if (currentIndex < maxIndex) {
-
-            currentIndex++;
-
-        } else {
-
-            currentIndex = 0;
-
-        }
-
-        updateGallery();
+    if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
     }
 
+    const targetItem = galleryItems[currentIndex];
 
-    function previousImage() {
+    galleryTrack.style.transform =
+        `translateX(-${targetItem.offsetLeft}px)`;
 
-        const itemsPerView = getItemsPerView();
+    galleryCounter.textContent =
+        `${currentIndex + 1} / ${galleryItems.length}`;
+}
 
-        const maxIndex =
-            galleryItems.length - itemsPerView;
 
-        if (currentIndex > 0) {
+function nextImage() {
 
-            currentIndex--;
+    const itemsPerView = getItemsPerView();
 
-        } else {
+    const maxIndex = galleryItems.length - itemsPerView;
 
-            currentIndex = maxIndex;
+    if (currentIndex < maxIndex) {
 
-        }
+        currentIndex++;
 
-        updateGallery();
+    } else {
+
+        currentIndex = 0;
+
     }
 
+    updateGallery();
+}
+
+
+function previousImage() {
+
+    const itemsPerView = getItemsPerView();
+
+    const maxIndex = galleryItems.length - itemsPerView;
+
+    if (currentIndex > 0) {
+
+        currentIndex--;
+
+    } else {
+
+        currentIndex = maxIndex;
+
+    }
+
+    updateGallery();
+}
+
+
+/* BOTONES */
+
+if (previousButton) {
 
     previousButton.addEventListener(
         "click",
         previousImage
     );
 
+}
+
+
+if (nextButton) {
+
     nextButton.addEventListener(
         "click",
         nextImage
     );
 
+}
 
-    /* =========================
-       MOBILE SWIPE
-    ========================= */
 
-    let touchStartX = 0;
-    let touchEndX = 0;
+/* =========================
+   SWIPE EN MOVIL
+========================= */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+
+if (galleryTrack) {
 
     galleryTrack.addEventListener(
         "touchstart",
@@ -162,14 +179,14 @@ if (galleryTrack && galleryItems.length > 0) {
             touchEndX =
                 event.changedTouches[0].screenX;
 
-            const swipeDistance =
+            const distance =
                 touchEndX - touchStartX;
 
-            if (Math.abs(swipeDistance) < 50) {
+            if (Math.abs(distance) < 50) {
                 return;
             }
 
-            if (swipeDistance < 0) {
+            if (distance < 0) {
 
                 nextImage();
 
@@ -183,26 +200,23 @@ if (galleryTrack && galleryItems.length > 0) {
         { passive: true }
     );
 
-
-    window.addEventListener(
-        "resize",
-        function() {
-
-            const itemsPerView = getItemsPerView();
-
-            const maxIndex =
-                galleryItems.length - itemsPerView;
-
-            if (currentIndex > maxIndex) {
-                currentIndex = maxIndex;
-            }
-
-            updateGallery();
-
-        }
-    );
-
-
-    updateGallery();
-
 }
+
+
+/* =========================
+   RESIZE
+========================= */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        updateGallery();
+
+    }
+);
+
+
+/* INICIO */
+
+updateGallery();
